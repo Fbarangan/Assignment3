@@ -21,13 +21,17 @@ outcome <- read.csv("outcome-of-care-measures.csv")
 # converting into tbl_df
 # Extracting only columns needed
  outcome_tbl <- tbl_df(outcome)
+ outcome_tbl_strip <- select(outcome_tbl, )
  # selecting outcome. better than just variable placement
- outcome_tbl_selected <-  select(outcome_tbl, c(2,7), contains("Heart.Failure"))
+ outcome_tbl_selected <-  select(outcome_tbl, c(2,7), contains("Heart.Failure"),
+                                 starts_with ("Comparison", ignore.case = FALSE ))
 
 ## Start of Function
 outcomeSelection  <- function(Outcome = "Pneumonia"){
 
-        outcome_tbl_selected <-  select(outcome_tbl, c(2,7), contains(Outcome))
+        outcome_tbl_selected <-  select(outcome_tbl, c(2,7), contains(Outcome),
+                                        -starts_with("Comparison"),
+                                        -starts_with("Footnote"))
         print(outcome_tbl_selected)
 }
 
