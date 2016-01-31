@@ -6,7 +6,7 @@ validState <- function(StateID = c("KY")) {
         # if state ID is in the list of State ID in the state.abb
         # then save it as "validStateID
         if (StateID %in% state.abb) {
-                validStateID <- StateID
+                validStateID <<- StateID
                 print(validStateID)
         }
         else{
@@ -31,22 +31,23 @@ outcomeSelection  <- function(Outcome = "Pneumonia"){
         outcome_tbl_selected <-  select(outcome_Sorted, c(2,7), contains(Outcome),
                                         -starts_with("Comparison"),
                                         -starts_with("Footnote"))
-        outcome_tbl_selected <<- outcome_tbl_selected
+        outcome_tbl_selected  <<-   outcome_tbl_selected
         names(outcome_tbl_selected)
-         # temp .Dont run this by itself. will give "all"
-
-                #temp
-       # arrange_outcome_tbl_selected <- arrange(outcome_tbl_selected, Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack) #
-                # when Hospital name is prearranged, it is already ok when there is a tie
-       # View(arrange_outcome_tbl_selected) # temp
-
 }
+        arrange_outcome_tbl_selected <- arrange(outcome_tbl_selected, Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack)
 
-## Order table
-## need to figure out how to removed missing data select(outcome_tbl_selected,Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure =="Not Available")
-## summarise (filter(by_date),
-##               med = median(dep_delay, na.rm = TRUE))
-##
+        arrange_outcome_tbl_selected <- arrange(outcome_tbl_selected, desc(Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack))
 
-# How to give give user selection
+        arrange_outcome_tbl_selected <- arrange(outcome_tbl_selected, Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack)
+
+        arrange_outcome_tbl_selected <- arrange(outcome_tbl_selected, Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia)
+        arrange_outcome_tbl_selected <- arrange(outcome_tbl_selected, desc(Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia))
+
+        arrange_outcome_tbl_selected <- arrange(outcome_tbl_selected, Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure)
+
+        Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure
+        Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia
+
+        View(arrange_outcome_tbl_selected)
+
 
