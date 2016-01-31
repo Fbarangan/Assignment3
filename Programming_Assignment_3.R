@@ -31,14 +31,22 @@ outcomeSelection  <- function(Outcome = "Pneumonia"){
         outcome_tbl_selected <-  select(outcome_Sorted, c(2,7), contains(Outcome),
                                         -starts_with("Comparison"),
                                         -starts_with("Footnote"))
+        outcome_tbl_selected <<- outcome_tbl_selected
+        names(outcome_tbl_selected)
+         # temp .Dont run this by itself. will give "all"
 
-        print(outcome_tbl_selected)
-        names(outcome_tbl_selected)  # temp .Dont run this by itself. will give "all"
-        view_outcome_tbl_selected <- arrange(outcome_tbl_selected, Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack) #
+                #temp
+       # arrange_outcome_tbl_selected <- arrange(outcome_tbl_selected, Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack) #
                 # when Hospital name is prearranged, it is already ok when there is a tie
-        View(view_outcome_tbl_selected) # temp
+       # View(arrange_outcome_tbl_selected) # temp
+
 }
 
 ## Order table
 ## need to figure out how to removed missing data select(outcome_tbl_selected,Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure =="Not Available")
- arrange(outcome_tbl_selected, desc(Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack))
+## summarise (filter(by_date),
+##               med = median(dep_delay, na.rm = TRUE))
+##
+
+# How to give give user selection
+
